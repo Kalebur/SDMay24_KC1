@@ -31,6 +31,25 @@ namespace KnowledgeCheck1_Calculator
             Console.Write(message);
         }
 
+        public void DisplayError(string message)
+        {
+            var currentColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(message);
+            Console.ForegroundColor = currentColor;
+            Console.WriteLine();
+        }
+
+        public void DisplayOptions()
+        {
+            DisplayMessage("1. [A]ddition");
+            DisplayMessage("2. [S]ubtraction");
+            DisplayMessage("3. [M]ultiplication");
+            DisplayMessage("4. [D]ivision");
+            DisplayMessage("5. [E]xit");
+            DisplayMessage("");
+        }
+
         public int GetIntegerFromUser()
         {
             bool validIntegerEntered;
@@ -46,6 +65,11 @@ namespace KnowledgeCheck1_Calculator
             }
 
             return userInput;
+        }
+
+        public string GetUserInput()
+        {
+            return Console.ReadLine();
         }
 
         private void BuildHeader()

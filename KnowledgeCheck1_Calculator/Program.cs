@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace KnowledgeCheck1_Calculator
 {
@@ -6,7 +7,11 @@ namespace KnowledgeCheck1_Calculator
     {
         static void Main(string[] args)
         {
-            var app = new App();
+            var app = new App(
+                new ConsoleReaderWriter(
+                    new CustomStringBuilder()
+                    )
+                );
             app.Run();
 
             //Console.WriteLine("Hello. Press 1 for addition, 2 for subtraction, 3 for multiplication, and 4 for division");
