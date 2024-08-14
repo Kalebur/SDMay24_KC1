@@ -3,7 +3,7 @@
     public interface IDataReaderWriter
     {
         void DisplayHeader();
-        void GetNumberFromUser();
+        int GetIntegerFromUser();
         void DisplayMessage(string message);
     }
 }

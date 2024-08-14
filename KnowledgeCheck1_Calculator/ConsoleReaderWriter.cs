@@ -23,12 +23,29 @@ namespace KnowledgeCheck1_Calculator
 
         public void DisplayMessage(string message)
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine(message);
         }
 
-        public void GetNumberFromUser()
+        public void DisplayMessageInline(string message)
         {
-            throw new System.NotImplementedException();
+            Console.Write(message);
+        }
+
+        public int GetIntegerFromUser()
+        {
+            bool validIntegerEntered;
+
+            DisplayMessageInline("Enter an integer: ");
+            validIntegerEntered = int.TryParse(Console.ReadLine(), out int userInput);
+
+            while (!validIntegerEntered)
+            {
+                DisplayMessage("Invalid input. Only whole numbers will be accepted.");
+                DisplayMessageInline("Enter an integer: ");
+                validIntegerEntered = int.TryParse(Console.ReadLine(), out userInput);
+            }
+
+            return userInput;
         }
 
         private void BuildHeader()

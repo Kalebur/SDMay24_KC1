@@ -1,4 +1,6 @@
-﻿namespace KnowledgeCheck1_Calculator
+﻿using System;
+
+namespace KnowledgeCheck1_Calculator
 {
     public class App
     {
@@ -6,6 +8,10 @@
         {
             var consoleInteractor = new ConsoleReaderWriter(new CustomStringBuilder());
             consoleInteractor.DisplayHeader();
+
+            var input = consoleInteractor.GetIntegerFromUser();
+
+            consoleInteractor.DisplayMessage($"You entered {input}");
         }
     }
 }
