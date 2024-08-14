@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using KnowledgeCheck1_Calculator.Logic;
+using KnowledgeCheck1_Calculator.UserInteraction;
 
 namespace KnowledgeCheck1_Calculator
 {
-    public class App
+    public class App(IDataReaderWriter dataReaderWriter)
     {
-        private readonly IDataReaderWriter _consoleDataReaderWriter;
+        private readonly IDataReaderWriter _consoleDataReaderWriter = dataReaderWriter;
         private readonly string _invalidString = "invalid";
         private readonly string _exitMessage = "Goodbye!";
-
-        public App(IDataReaderWriter dataReaderWriter)
-        {
-            _consoleDataReaderWriter = dataReaderWriter;
-        }
 
         public void Run()
         {
@@ -24,12 +21,15 @@ namespace KnowledgeCheck1_Calculator
             do
             {
                 _consoleDataReaderWriter.DisplayOptions();
-                _consoleDataReaderWriter.DisplayMessage("Please choose from the options above.");
-                _consoleDataReaderWriter.DisplayMessage("You may enter either the number or the action letter.");
+                _consoleDataReaderWriter.DisplayMessage(
+                    "Please choose from the options above.");
+                _consoleDataReaderWriter.DisplayMessage(
+                    "You may enter either the number or the action letter.");
                 input = _consoleDataReaderWriter.GetUserInput();
                 HandleUserInput(input);
 
-                _consoleDataReaderWriter.DisplayMessageInline("Do you want to do another operation? (y/n): ");
+                _consoleDataReaderWriter.DisplayMessageInline(
+                    "Do you want to do another operation? (y/n): ");
                 var continueSelection = _consoleDataReaderWriter.GetUserInput();
                 if (string.Equals(continueSelection, "n")) break;
             } while (!string.Equals(input, "e") && !string.Equals(input, "5"));
@@ -107,7 +107,8 @@ namespace KnowledgeCheck1_Calculator
 
             do
             {
-                _consoleDataReaderWriter.DisplayMessageInline("Enter an integer (enter 'q' to finalize): ");
+                _consoleDataReaderWriter.DisplayMessageInline(
+                    "Enter an integer (enter 'q' to finalize): ");
                 input = _consoleDataReaderWriter.GetUserInput();
                 if (string.Equals(input, "q"))
                 {

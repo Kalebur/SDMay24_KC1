@@ -1,4 +1,4 @@
-﻿namespace KnowledgeCheck1_Calculator
+﻿namespace KnowledgeCheck1_Calculator.UserInteraction
 {
     public interface IDataReaderWriter
     {

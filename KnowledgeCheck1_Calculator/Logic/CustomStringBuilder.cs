@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace KnowledgeCheck1_Calculator
+namespace KnowledgeCheck1_Calculator.Logic
 {
     public class CustomStringBuilder : ICustomStringBuilder
     {

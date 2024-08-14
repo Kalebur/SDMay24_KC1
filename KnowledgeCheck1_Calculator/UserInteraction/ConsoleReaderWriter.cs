@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Text;
+using KnowledgeCheck1_Calculator.Logic;
 
-namespace KnowledgeCheck1_Calculator
+namespace KnowledgeCheck1_Calculator.UserInteraction
 {
     internal class ConsoleReaderWriter : IDataReaderWriter
     {
@@ -55,13 +56,16 @@ namespace KnowledgeCheck1_Calculator
             bool validIntegerEntered;
 
             DisplayMessageInline("Enter an integer: ");
-            validIntegerEntered = int.TryParse(Console.ReadLine(), out int userInput);
+            validIntegerEntered = int.TryParse(Console.ReadLine(),
+                out int userInput);
 
             while (!validIntegerEntered)
             {
-                DisplayMessage("Invalid input. Only whole numbers will be accepted.");
+                DisplayMessage("Invalid input. " +
+                    "Only whole numbers will be accepted.");
                 DisplayMessageInline("Enter an integer: ");
-                validIntegerEntered = int.TryParse(Console.ReadLine(), out userInput);
+                validIntegerEntered = int.TryParse(Console.ReadLine(),
+                    out userInput);
             }
 
             return userInput;
@@ -102,7 +106,8 @@ namespace KnowledgeCheck1_Calculator
             if (totalBlanks % 2 == 0)
             {
                 AppendCharacterXTimes(' ', paddingLength);
-            } else
+            }
+            else
             {
                 AppendCharacterXTimes(' ', paddingLength + 1);
             }
@@ -124,7 +129,7 @@ namespace KnowledgeCheck1_Calculator
 
         private int GetNeededBlankCount(string text)
         {
-            return (_totalLineLength - 2 - text.Length);
+            return _totalLineLength - 2 - text.Length;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Text;
+using KnowledgeCheck1_Calculator.Logic;
+using KnowledgeCheck1_Calculator.UserInteraction;
 
 namespace KnowledgeCheck1_Calculator
 {

@@ -1,4 +1,4 @@
-﻿namespace KnowledgeCheck1_Calculator
+﻿namespace KnowledgeCheck1_Calculator.Logic
 {
     public interface ICustomStringBuilder
     {
