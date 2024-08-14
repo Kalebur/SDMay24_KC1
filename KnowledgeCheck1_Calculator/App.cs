@@ -62,34 +62,41 @@ namespace KnowledgeCheck1_Calculator
 
                 if (numbers == null || numbers.Count < 2)
                 {
-                    _consoleDataReaderWriter.DisplayError("Not enough numbers entered. Aborting operation...");
+                    _consoleDataReaderWriter.DisplayError(
+                        "Not enough numbers entered. Aborting operation...");
                     return;
                 }
 
                 switch (choice)
                 {
                     case "add":
-                        DisplayResult("sum", numbers, Calculator.Add(numbers));
+                        DisplayResult("sum", numbers, 
+                            Calculator.Add(numbers));
                         break;
 
                     case "subtract":
-                        DisplayResult("difference", numbers, Calculator.Subtract(numbers));
+                        DisplayResult("difference", numbers, 
+                            Calculator.Subtract(numbers));
                         break;
 
                     case "multiply":
-                        DisplayResult("product", numbers, Calculator.Multiply(numbers));
+                        DisplayResult("product", numbers,
+                            Calculator.Multiply(numbers));
                         break;
 
                     case "divide":
-                        DisplayResult("quotient", numbers, Calculator.Divide(numbers));
+                        DisplayResult("quotient", numbers,
+                            Calculator.Divide(numbers));
                         break;
                 }
             }
         }
 
-        private void DisplayResult(string operationResultTerm, IEnumerable<int> numbers, object result)
+        private void DisplayResult(string operationResultTerm, 
+            IEnumerable<int> numbers, object result)
         {
-            string resultString = $"The {operationResultTerm} of {string.Join(',', numbers)} is {result}.";
+            string resultString = $"The {operationResultTerm} of " +
+                $"{string.Join(',', numbers)} is {result}.";
             _consoleDataReaderWriter.DisplayMessage(resultString);
         }
 
