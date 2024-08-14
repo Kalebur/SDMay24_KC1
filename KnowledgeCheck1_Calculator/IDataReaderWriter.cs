@@ -7,6 +7,7 @@
         int GetIntegerFromUser();
         string GetUserInput();
         void DisplayMessage(string message);
+        void DisplayMessageInline(string message);
         void DisplayError(string message);
     }
 }

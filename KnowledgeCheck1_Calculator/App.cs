@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace KnowledgeCheck1_Calculator
 {
@@ -7,6 +8,7 @@ namespace KnowledgeCheck1_Calculator
     {
         private readonly IDataReaderWriter _consoleDataReaderWriter;
         private readonly string _invalidString = "invalid";
+        private readonly string _exitMessage = "Goodbye!";
 
         public App(IDataReaderWriter dataReaderWriter)
         {
@@ -26,7 +28,13 @@ namespace KnowledgeCheck1_Calculator
                 _consoleDataReaderWriter.DisplayMessage("You may enter either the number or the action letter.");
                 input = _consoleDataReaderWriter.GetUserInput();
                 HandleUserInput(input);
-            } while (input.ToLower() != "e" && input != "5");
+
+                _consoleDataReaderWriter.DisplayMessageInline("Do you want to do another operation? (y/n): ");
+                var continueSelection = _consoleDataReaderWriter.GetUserInput();
+                if (string.Equals(continueSelection, "n")) break;
+            } while (!string.Equals(input, "e") && !string.Equals(input, "5"));
+
+            _consoleDataReaderWriter.DisplayMessage(_exitMessage);
 
         }
 
@@ -40,42 +48,93 @@ namespace KnowledgeCheck1_Calculator
         {
             if (choice == string.Empty)
             {
-                _consoleDataReaderWriter.DisplayMessage("Goodbye!");
+                _consoleDataReaderWriter.DisplayMessage(_exitMessage);
+                Environment.Exit(0);
                 return;
             }
             else if (choice == _invalidString)
             {
                 _consoleDataReaderWriter.DisplayError("Invalid selection.");
             }
+            else
+            {
+                var numbers = GetNumbersFromUser();
+
+                if (numbers == null || numbers.Count < 2)
+                {
+                    _consoleDataReaderWriter.DisplayError("Not enough numbers entered. Aborting operation...");
+                    return;
+                }
+
+                switch (choice)
+                {
+                    case "add":
+                        DisplayResult("sum", numbers, Calculator.Add(numbers));
+                        break;
+
+                    case "subtract":
+                        DisplayResult("difference", numbers, Calculator.Subtract(numbers));
+                        break;
+
+                    case "multiply":
+                        DisplayResult("product", numbers, Calculator.Multiply(numbers));
+                        break;
+
+                    case "divide":
+                        DisplayResult("quotient", numbers, Calculator.Divide(numbers));
+                        break;
+                }
+            }
+        }
+
+        private void DisplayResult(string operationResultTerm, IEnumerable<int> numbers, object result)
+        {
+            string resultString = $"The {operationResultTerm} of {string.Join(',', numbers)} is {result}.";
+            _consoleDataReaderWriter.DisplayMessage(resultString);
+        }
+
+        private List<int> GetNumbersFromUser()
+        {
+            string input;
+            var numbers = new List<int>();
+
+            do
+            {
+                _consoleDataReaderWriter.DisplayMessageInline("Enter an integer (enter 'q' to finalize): ");
+                input = _consoleDataReaderWriter.GetUserInput();
+                if (string.Equals(input, "q"))
+                {
+                    break;
+                }
+                else if (!IsValidInteger(input))
+                {
+                    _consoleDataReaderWriter.DisplayError("Invalid input.");
+                }
+                else
+                {
+                    numbers.Add(int.Parse(input));
+                }
+            } while (!string.Equals(input, "q"));
+
+            return numbers;
+        }
+
+        private static bool IsValidInteger(string input)
+        {
+            return int.TryParse(input, out _);
         }
 
         private string ParseUserChoice(string input)
         {
-            switch (input.ToLower())
+            return input.ToLower() switch
             {
-                case "1":
-                case "a":
-                    return "add";
-
-                case "2":
-                case "s":
-                    return "subtract";
-
-                case "3":
-                case "m":
-                    return "multiply";
-
-                case "4":
-                case "d":
-                    return "divide";
-
-                case "5":
-                case "e":
-                    return string.Empty;
-
-                default:
-                    return _invalidString;
-            }
+                "1" or "a" => "add",
+                "2" or "s" => "subtract",
+                "3" or "m" => "multiply",
+                "4" or "d" => "divide",
+                "5" or "e" => string.Empty,
+                _ => _invalidString,
+            };
         }
     }
 }
