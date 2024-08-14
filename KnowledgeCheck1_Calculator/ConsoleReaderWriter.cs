@@ -6,8 +6,8 @@ namespace KnowledgeCheck1_Calculator
     internal class ConsoleReaderWriter : IDataReaderWriter
     {
         private readonly ICustomStringBuilder _stringBuilder;
-        private int _totalLineLength = 40;
-        private char _dividerCharacter = '*';
+        private readonly int _totalLineLength = 40;
+        private readonly char _dividerCharacter = '*';
         private string _header;
 
         public ConsoleReaderWriter(ICustomStringBuilder stringBuilder)

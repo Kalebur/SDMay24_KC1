@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace KnowledgeCheck1_Calculator
 {
@@ -15,7 +16,7 @@ namespace KnowledgeCheck1_Calculator
         {
             _consoleDataReaderWriter.DisplayHeader();
 
-            var input = string.Empty;
+            string input;
 
             do
             {
@@ -25,6 +26,8 @@ namespace KnowledgeCheck1_Calculator
                 input = _consoleDataReaderWriter.GetUserInput();
                 HandleUserInput(input);
             } while (input.ToLower() != "e" && input != "5");
+
+            Console.WriteLine(Calculator.Subtract(new List<int> { 2, 4, 6 }));
         }
 
         private void HandleUserInput(string input)
