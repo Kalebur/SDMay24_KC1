@@ -56,7 +56,7 @@ namespace KnowledgeCheck1_Calculator
             return first / second;
         }
 
-        public static double Divide(List<double> numbers)
+        public static double Divide(List<int> numbers)
         {
             double quotient = numbers.First();
 

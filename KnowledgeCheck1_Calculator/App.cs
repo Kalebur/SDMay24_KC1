@@ -6,6 +6,7 @@ namespace KnowledgeCheck1_Calculator
     public class App
     {
         private readonly IDataReaderWriter _consoleDataReaderWriter;
+        private readonly string _invalidString = "invalid";
 
         public App(IDataReaderWriter dataReaderWriter)
         {
@@ -27,48 +28,53 @@ namespace KnowledgeCheck1_Calculator
                 HandleUserInput(input);
             } while (input.ToLower() != "e" && input != "5");
 
-            Console.WriteLine(Calculator.Subtract(new List<int> { 2, 4, 6 }));
         }
 
         private void HandleUserInput(string input)
         {
-            string choice = string.Empty;
+            string choice = ParseUserChoice(input);
+            ExecuteUserChoice(choice);
+        }
 
+        private void ExecuteUserChoice(string choice)
+        {
+            if (choice == string.Empty)
+            {
+                _consoleDataReaderWriter.DisplayMessage("Goodbye!");
+                return;
+            }
+            else if (choice == _invalidString)
+            {
+                _consoleDataReaderWriter.DisplayError("Invalid selection.");
+            }
+        }
+
+        private string ParseUserChoice(string input)
+        {
             switch (input.ToLower())
             {
                 case "1":
                 case "a":
-                    choice = "add";
-                    break;
+                    return "add";
 
                 case "2":
                 case "s":
-                    choice = "subtract";
-                    break;
+                    return "subtract";
 
                 case "3":
                 case "m":
-                    choice = "multiply";
-                    break;
+                    return "multiply";
 
                 case "4":
                 case "d":
-                    choice = "divide";
-                    break;
+                    return "divide";
 
                 case "5":
                 case "e":
-                    _consoleDataReaderWriter.DisplayMessage("Goodbye!");
-                    break;
+                    return string.Empty;
 
                 default:
-                    _consoleDataReaderWriter.DisplayError($"\"{input}\" is not a valid option");
-                    break;
-            }
-
-            if (choice !=  string.Empty)
-            {
-                _consoleDataReaderWriter.DisplayMessage("Cherry Pie");
+                    return _invalidString;
             }
         }
     }
