@@ -9,16 +9,58 @@ namespace CalculatorTests
         private static readonly int _minInteger = -10_000;
         private static readonly int _maxInteger = 10_000;
 
-        [TestCase(null)]
-        public static void Add_ThrowsNullException_IfCollectionIsNull(IEnumerable<int> input)
+        [Test]
+        [Category("Null Collection Tests")]
+        public static void Add_ThrowsNullException_IfCollectionIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => Calculator.Add(input));
+            Assert.Throws<ArgumentNullException>(() => Calculator.Add(null));
         }
+
+        [Test]
+        [Category("Null Collection Tests")]
+        public static void Subtract_ThrowsNullException_IfCollectionIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => Calculator.Subtract(null));
+        }
+
+        [Test]
+        [Category("Null Collection Tests")]
+        public static void Multiply_ThrowsNullException_IfCollectionIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => Calculator.Multiply(null));
+        }
+
+        [Test]
+        [Category("Null Collection Tests")]
+        public static void Divide_ThrowsNullException_IfCollectionIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => Calculator.Divide(null));
+        }
+
+        /* ================== Empty Collection Tests ================= */
 
         [TestCaseSource(nameof(GetEmptyCollections))]
         public static void Add_ThrowsArgumentException_IfCollectionIsEmpty(IEnumerable<int> input)
         {
             Assert.Throws<ArgumentException>(() => Calculator.Add(input));
+        }
+
+        [TestCaseSource(nameof(GetEmptyCollections))]
+        public static void Subtract_ThrowsArgumentException_IfCollectionIsEmpty(IEnumerable<int> input)
+        {
+            Assert.Throws<ArgumentException>(() => Calculator.Subtract(input.ToList()));
+        }
+
+        [TestCaseSource(nameof(GetEmptyCollections))]
+        public static void Multiply_ThrowsArgumentException_IfCollectionIsEmpty(IEnumerable<int> input)
+        {
+            Assert.Throws<ArgumentException>(() => Calculator.Multiply(input));
+        }
+
+        [TestCaseSource(nameof(GetEmptyCollections))]
+        public static void Divide_ThrowsArgumentException_IfCollectionIsEmpty(IEnumerable<int> input)
+        {
+            Assert.Throws<ArgumentException>(() => Calculator.Divide(input.ToList()));
         }
 
         [TestCaseSource(nameof(GetSingleValueCollection))]
