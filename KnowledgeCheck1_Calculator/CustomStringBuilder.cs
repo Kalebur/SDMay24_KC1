@@ -12,12 +12,17 @@ namespace KnowledgeCheck1_Calculator
 
         public void Append(string text)
         {
-            throw new System.NotImplementedException();
+            _stringBuilder.Append(text);
         }
 
         public void AppendLine(string lineText)
         {
-            throw new System.NotImplementedException();
+            _stringBuilder.AppendLine(lineText);
+        }
+
+        public override string ToString()
+        {
+            return _stringBuilder.ToString();
         }
     }
 }

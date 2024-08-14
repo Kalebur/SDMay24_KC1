@@ -2,7 +2,7 @@
 {
     public interface IDataReaderWriter
     {
-        void DisplayMenu();
+        void DisplayHeader();
         void GetNumberFromUser();
         void DisplayMessage(string message);
     }
