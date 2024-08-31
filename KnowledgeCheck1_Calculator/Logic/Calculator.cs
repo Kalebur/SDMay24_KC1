@@ -61,12 +61,15 @@ namespace KnowledgeCheck1_Calculator.Logic
 
         public static double Divide(double first, double second)
         {
+            if (second == 0) throw new DivideByZeroException("Attempting to divide by zero.");
             return first / second;
         }
 
         public static double Divide(List<int> numbers)
         {
             ValidateCollection(numbers);
+            if (numbers.Skip(1).Any(number => number == 0)) throw
+                    new DivideByZeroException("One or more values will result in a division by zero.");
             if (numbers.Count == 1)
             {
                 return numbers.First();

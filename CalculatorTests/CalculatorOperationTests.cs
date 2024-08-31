@@ -196,43 +196,5 @@ namespace CalculatorTests
         }
 
         #endregion
-
-        #region Private Helper Functions
-        private static object[] GetEmptyCollections()
-        {
-            return
-            [
-                new List<int>(),
-                Array.Empty<int>(),
-            ];
-        }
-
-        private static IEnumerable<int>[] GetSingleValueCollection()
-        {
-            var randomNumber = _random.Next(_minInteger, _maxInteger);
-
-            return new[] { new List<int> { randomNumber } };
-        }
-
-        private static IEnumerable<int>[] GetCollectionOfIntegers()
-        {
-            List<int> numbers = [];
-            var countOfNumbersToAdd = _random.Next(2, 100);
-
-            for (int i = 0; i < countOfNumbersToAdd; i++)
-            {
-                numbers.Add(GetRandomInteger(_minInteger, _maxInteger));
-            }
-
-            return [
-                numbers,
-                ];
-        }
-
-        private static int GetRandomInteger(int minValue, int maxValue)
-        {
-            return _random.Next(minValue, maxValue);
-        }
-        #endregion
     }
 }
