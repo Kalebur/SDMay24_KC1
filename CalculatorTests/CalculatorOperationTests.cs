@@ -196,6 +196,13 @@ namespace CalculatorTests
             Assert.That(result, Is.EqualTo(quotient));
         }
 
+        [TestCase(new int[] {1, 8, 0, 3, 2})]
+        [TestCase(new int[] {1, 0, 14, 0, 0, 0, 0, 3})]
+        public static void Divide_ThrowsDivideByZeroException_WhenGivenCollectionThatContainsZeroInNonFirstPosition(IEnumerable<int> input)
+        {
+            Assert.Throws<DivideByZeroException>(() => Calculator.Divide(input.ToList()));
+        }
+
         #endregion
 
         #region Private Helpers
