@@ -203,6 +203,16 @@ namespace CalculatorTests
             Assert.Throws<DivideByZeroException>(() => Calculator.Divide(input.ToList()));
         }
 
+        [TestCase(new int[] { 0, 8, 37, 3, 2 })]
+        [TestCase(new int[] { 0, 24, 19, 104, -220, 64, 12 })]
+        [TestCase(new int[] { 0, })]
+        public static void Divide_ReturnsZero_WhenFirstValueInCollectionIsZeroAndOtherValuesAreNonZero(IEnumerable<int> input)
+        {
+            var result = Calculator.Divide(input.ToList());
+
+            Assert.That(result, Is.EqualTo(0));
+        }
+
         #endregion
 
         #region Private Helpers
