@@ -8,6 +8,7 @@ namespace CalculatorTests
         private static readonly Random _random = new();
         private static readonly int _minInteger = -10_000;
         private static readonly int _maxInteger = 10_000;
+        public static readonly TestHelpers _testHelpers = new TestHelpers();
 
         #region Null Collection Tests
         [Test]
@@ -195,6 +196,44 @@ namespace CalculatorTests
             Assert.That(result, Is.EqualTo(quotient));
         }
 
+        #endregion
+
+        #region Private Helpers
+        private static object[] GetEmptyCollections()
+        {
+            return
+            [
+                new List<int>(),
+                Array.Empty<int>(),
+            ];
+        }
+
+        private static IEnumerable<int>[] GetSingleValueCollection()
+        {
+            var randomNumber = _random.Next(_minInteger, _maxInteger);
+
+            return new[] { new List<int> { randomNumber } };
+        }
+
+        private static IEnumerable<int>[] GetCollectionOfIntegers()
+        {
+            List<int> numbers = [];
+            var countOfNumbersToAdd = _random.Next(2, 100);
+
+            for (int i = 0; i < countOfNumbersToAdd; i++)
+            {
+                numbers.Add(GetRandomInteger(_minInteger, _maxInteger));
+            }
+
+            return [
+                numbers,
+            ];
+        }
+
+        private static int GetRandomInteger(int minValue, int maxValue)
+        {
+            return _random.Next(minValue, maxValue);
+        }
         #endregion
     }
 }
