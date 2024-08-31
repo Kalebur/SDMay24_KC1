@@ -4,14 +4,14 @@ using KnowledgeCheck1_Calculator.Logic;
 
 namespace KnowledgeCheck1_Calculator.UserInteraction
 {
-    internal class ConsoleReaderWriter : IDataReaderWriter
+    internal class ConsoleUserInteractor : IUserInteractor
     {
         private readonly ICustomStringBuilder _stringBuilder;
         private readonly int _totalLineLength = 40;
         private readonly char _dividerCharacter = '*';
         private string _header;
 
-        public ConsoleReaderWriter(ICustomStringBuilder stringBuilder)
+        public ConsoleUserInteractor(ICustomStringBuilder stringBuilder)
         {
             _stringBuilder = stringBuilder;
             BuildHeader();
@@ -49,26 +49,6 @@ namespace KnowledgeCheck1_Calculator.UserInteraction
             DisplayMessage("4. [D]ivision");
             DisplayMessage("5. [E]xit");
             DisplayMessage("");
-        }
-
-        public int GetIntegerFromUser()
-        {
-            bool validIntegerEntered;
-
-            DisplayMessageInline("Enter an integer: ");
-            validIntegerEntered = int.TryParse(Console.ReadLine(),
-                out int userInput);
-
-            while (!validIntegerEntered)
-            {
-                DisplayMessage("Invalid input. " +
-                    "Only whole numbers will be accepted.");
-                DisplayMessageInline("Enter an integer: ");
-                validIntegerEntered = int.TryParse(Console.ReadLine(),
-                    out userInput);
-            }
-
-            return userInput;
         }
 
         public string GetUserInput()

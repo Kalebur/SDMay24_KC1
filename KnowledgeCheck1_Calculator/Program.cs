@@ -9,7 +9,7 @@ namespace KnowledgeCheck1_Calculator
         static void Main(string[] args)
         {
             var app = new App(
-                new ConsoleReaderWriter(
+                new ConsoleUserInteractor(
                     new CustomStringBuilder()
                     )
                 );

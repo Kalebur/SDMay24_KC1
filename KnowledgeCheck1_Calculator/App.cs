@@ -6,9 +6,9 @@ using KnowledgeCheck1_Calculator.UserInteraction;
 
 namespace KnowledgeCheck1_Calculator
 {
-    public class App(IDataReaderWriter dataReaderWriter)
+    public class App(IUserInteractor dataReaderWriter)
     {
-        private readonly IDataReaderWriter _consoleDataReaderWriter = dataReaderWriter;
+        private readonly IUserInteractor _consoleDataReaderWriter = dataReaderWriter;
         private readonly string _invalidString = "invalid";
         private readonly string _exitMessage = "Goodbye!";
 
